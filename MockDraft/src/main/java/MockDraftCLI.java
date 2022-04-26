@@ -144,11 +144,11 @@ public class MockDraftCLI {
 
                         for (Pick pick : draftOrder) {
                             if (pick.getTeam().getName().equalsIgnoreCase(tradeTeam)) {
-                                System.out.print("Pick(s) this round: ");
-                                System.out.println(pick.getPickNum() + " ");
-                                System.out.println("Which pick would you like from the " + pick.getTeam() + " for your current pick: ");
-//                                String pickNumberToTrade = userInput.nextLine().trim();
-//                                int pickNumTrade = Integer.parseInt(pickNumberToTrade);
+//                                System.out.print("Pick(s) this round: ");
+//                                System.out.println(pick.getPickNum() + " ");
+//                                System.out.println("Which pick would you like from the " + pick.getTeam() + " for your current pick: ");
+////                                String pickNumberToTrade = userInput.nextLine().trim();
+////                                int pickNumTrade = Integer.parseInt(pickNumberToTrade);
                                 pick.setTeam(draftOrder.get(i).getTeam());
                                 for (Team team : teams) {
                                     if (team.getName().equalsIgnoreCase(tradeTeam)) {
