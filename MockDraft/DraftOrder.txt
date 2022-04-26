@@ -1,0 +1,33 @@
+1, Jacksonville, Jaguars
+2, Detroit, Lions
+3, Houston, Texans
+4, New York, Jets
+5, New York, Giants
+6, Carolina, Panthers
+7, New York, Giants
+8, Atlanta, Falcons
+9, Seattle, Seahawks
+10, New York, Jets
+11, Washington, Commanders
+12, Minnesota, Vikings
+13, Houston, Texans
+14, Baltimore, Ravens
+15, Philadelphia, Eagles
+16, New Orleans, Saints
+17, Los Angeles, Chargers
+18, Philadelphia, Eagles
+19, New Orleans, Saints
+20, Pittsburgh, Steelers
+21, New England, Patriots
+22, Green Bay, Packers
+23, Arizona, Cardinals
+24, Dallas, Cowboys
+25, Buffalo, Bills
+26, Tennessee, Titans
+27, Tampa Bay, Buccaneers
+28, Green Bay, Packers
+29, Kansas City, Chiefs
+30, Kansas City, Chiefs
+31, Cincinnati, Bengals
+32, Detroit, Lions
+
