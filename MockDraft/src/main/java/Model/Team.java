@@ -23,6 +23,6 @@ public class Team {
 
     @Override
     public String toString() {
-        return location.trim() + name;
+        return location.trim() + " " + name;
     }
 }

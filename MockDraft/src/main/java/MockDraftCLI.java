@@ -2,12 +2,9 @@ import Model.Pick;
 import Model.Prospect;
 import Model.Team;
 import View.Menu;
-import org.springframework.beans.factory.annotation.Value;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Array;
 import java.util.*;
 
 public class MockDraftCLI {
@@ -17,6 +14,7 @@ public class MockDraftCLI {
     private List<Pick> draftOrder = new ArrayList<>();
     private List<Prospect> prospects = new ArrayList<>();
     private List<Prospect> toRemove = new ArrayList<>();
+    private List<Team> teams = new ArrayList<>();
 
     public MockDraftCLI(Menu menu) {
         this.userInput = new Scanner(System.in);
@@ -30,19 +28,40 @@ public class MockDraftCLI {
     }
 
     public void run() {
+        File leagueFile = new File("League.txt");
         File draftOrderFile = new File("DraftOrder.txt");
         File prospectFile = new File("Top60.txt");
         banner();
         this.menu.startMenu();
         String input = userInput.nextLine();
         if (input.equalsIgnoreCase("S")) {
-            startDraft(draftOrderFile, prospectFile);
+            startDraft(draftOrderFile, prospectFile, leagueFile);
         } else if (input.equalsIgnoreCase("E")) {
             System.out.println("Your loss!");
             System.exit(1);
         } else {
             System.out.println("Invalid entry! Please restart and enter 'S' or 'E'. Thank you!");
         }
+    }
+
+    public List<Team> createLeague(File file) {
+        Scanner fileScanner = null;
+        try {
+            fileScanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to create League. File not found!");
+            System.exit(1);
+        }
+        while (fileScanner.hasNext()) {
+            String line = fileScanner.nextLine();
+            String[] lineArr = line.split("\\,");
+            String location = lineArr[0];
+            String name = lineArr[1].trim();
+
+            Team team = new Team(location, name);
+            this.teams.add(team);
+        }
+        return this.teams;
     }
 
     public List<Pick> setDraftOrder(File file) {
@@ -59,7 +78,7 @@ public class MockDraftCLI {
             String pickNumAsString = lineArr[0];
             int pickNumAsInt = Integer.parseInt(pickNumAsString);
             String location = lineArr[1];
-            String name = lineArr[2];
+            String name = lineArr[2].trim();
 
             Team team = new Team(location, name);
             Pick pick = new Pick(pickNumAsInt, team, null);
@@ -97,7 +116,8 @@ public class MockDraftCLI {
         System.out.println("##########################################\n");
     }
 
-    public void startDraft(File draftOrderFile, File prospectFile) {
+    public void startDraft(File draftOrderFile, File prospectFile, File leagueFile) {
+        createLeague(leagueFile);
         setDraftOrder(draftOrderFile);
         loadProspects(prospectFile);
         boolean paused = true;
@@ -116,28 +136,25 @@ public class MockDraftCLI {
                     } else if (subMenuChoice.equalsIgnoreCase("P")) {
                         System.out.print("Make your pick: ");
                         String pick = userInput.nextLine();
-                        for (Prospect prospect : prospects) {
-                            if (prospect.getName().equalsIgnoreCase(pick)) {
-                                System.out.println("The " + draftOrder.get(i).getTeam() + " have selected " + prospect.getName() + "!");
-                                System.out.println("==================================================================");
-                                draftOrder.get(i).setProspect(prospect);
-                                toRemove.add(prospect);
-                                i += 1;
-                            }
-                        }
-                        prospects.removeAll(toRemove);
+                        Prospect.draftProspect(toRemove,prospects,draftOrder,pick,i);
+                        i += 1;
                     } else if (subMenuChoice.equalsIgnoreCase("T")) {
                         System.out.print("Enter a team to trade with ('Packers', 'Cowboys', etc.): ");
                         String tradeTeam = userInput.nextLine();
 
                         for (Pick pick : draftOrder) {
                             if (pick.getTeam().getName().equalsIgnoreCase(tradeTeam)) {
+                                System.out.print("Pick(s) this round: ");
                                 System.out.println(pick.getPickNum() + " ");
-                                System.out.print("Which pick number would you like to trade to the " + pick.getTeam() + " for their pick: ");
-                                String pickNumberToTrade = userInput.nextLine();
-                                int pickNumTrade = Integer.parseInt(pickNumberToTrade);
-                                draftOrder.get(pickNumTrade - 1).setTeam(pick.getTeam());
-                                pick.setTeam(draftOrder.get(pickNumTrade - 1).getTeam());
+                                System.out.println("Which pick would you like from the " + pick.getTeam() + " for your current pick: ");
+//                                String pickNumberToTrade = userInput.nextLine().trim();
+//                                int pickNumTrade = Integer.parseInt(pickNumberToTrade);
+                                pick.setTeam(draftOrder.get(i).getTeam());
+                                for (Team team : teams) {
+                                    if (team.getName().equalsIgnoreCase(tradeTeam)) {
+                                        draftOrder.get(i).setTeam(team);
+                                    }
+                                }
                             }
                         }
 

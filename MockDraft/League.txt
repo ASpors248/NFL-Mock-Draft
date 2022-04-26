@@ -1,0 +1,32 @@
+Chicago,Bears
+Detroit,Lions
+Minnesota,Vikings
+Green Bay,Packers
+Dallas,Cowboys
+Washington,Commanders
+New York,Giants
+Philadelphia,Eagles
+New Orleans,Saints
+Tampa Bay,Buccaneers
+Atlanta,Falcons
+Carolina,Panthers
+Los Angeles,Rams
+Seattle,Seahawks
+Arizona,Cardinals
+San Francisco,49ers
+New England,Patriots
+Buffalo,Bills
+New York,Jets
+Miami,Dolphins
+Pittsburgh,Steelers
+Cleveland,Browns
+Cincinnati,Bengals
+Baltimore,Ravens
+Indianapolis,Colts
+Tennessee,Titans
+Houston,Texans
+Jacksonville,Jaguars
+Denver,Broncos
+Kansas City,Chiefs
+Los Angeles,Chargers
+Los Vegas,Raiders
