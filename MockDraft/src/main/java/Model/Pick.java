@@ -21,7 +21,7 @@ public class Pick{
         }
         return pickNum + ". " + team + ": " + prospect;
     }
-
+    
     public int getPickNum() {
         return pickNum;
     }
