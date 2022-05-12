@@ -55,17 +55,17 @@ public class Prospect{
     }
 
 
-    public static void draftProspect(List<Prospect> toRemove, List<Prospect> prospects, List<Pick> draftOrder, String pick, int i) {
-        for (Prospect prospect : prospects) {
-            if (prospect.getName().equalsIgnoreCase(pick)) {
-                System.out.println("The " + draftOrder.get(i).getTeam() + " have selected " + prospect.getName() + "!");
-                System.out.println("==================================================================");
-                draftOrder.get(i).setProspect(prospect);
-                toRemove.add(prospect);
-            }
-        }
-        prospects.removeAll(toRemove);
-    }
+//    public static void draftProspect(List<Prospect> toRemove, List<Prospect> prospects, List<Pick> draftOrder, String pick, int i) {
+//        for (Prospect prospect : prospects) {
+//            if (prospect.getName().equalsIgnoreCase(pick)) {
+//                System.out.println("The " + draftOrder.get(i).getTeam() + " have selected " + prospect.getName() + "!");
+//                System.out.println("==================================================================");
+//                draftOrder.get(i).setProspect(prospect);
+//                toRemove.add(prospect);
+//            }
+//        }
+//        prospects.removeAll(toRemove);
+//    }
 }
 
 

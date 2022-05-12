@@ -136,8 +136,16 @@ public class MockDraftCLI {
                     } else if (subMenuChoice.equalsIgnoreCase("P")) {
                         System.out.print("Make your pick: ");
                         String pick = userInput.nextLine();
-                        Prospect.draftProspect(toRemove,prospects,draftOrder,pick,i);
-                        i += 1;
+                        for (Prospect prospect : prospects) {
+                            if (prospect.getName().equalsIgnoreCase(pick)) {
+                                System.out.println("The " + draftOrder.get(i).getTeam() + " have selected " + prospect.getName() + "!");
+                                System.out.println("==================================================================");
+                                draftOrder.get(i).setProspect(prospect);
+                                toRemove.add(prospect);
+                                i += 1;
+                            }
+                        }
+                        prospects.removeAll(toRemove);
                     } else if (subMenuChoice.equalsIgnoreCase("T")) {
                         System.out.print("Enter a team to trade with ('Packers', 'Cowboys', etc.): ");
                         String tradeTeam = userInput.nextLine();
@@ -168,7 +176,6 @@ public class MockDraftCLI {
             }
         }
     }
-
 
             public void dMenu () {
                 this.menu.displayProspectsMenu();
